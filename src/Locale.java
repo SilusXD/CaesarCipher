@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
-
-public enum locale {
+public enum Locale
+{
+    en,
+    ru
 }
