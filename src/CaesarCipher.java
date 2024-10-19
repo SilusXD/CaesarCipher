@@ -1,3 +1,7 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class CaesarCipher
 {
     private int shift;
@@ -93,6 +97,36 @@ public class CaesarCipher
         return newStr;
     }
 
+    public void encryptFile(String file)
+    {
+        String str = "";
+
+        try(FileReader reader = new FileReader(file))
+        {
+            int c;
+            while((c=reader.read())!=-1){
+
+                str += (char)c;
+            }
+        }
+        catch(IOException ex){
+
+            System.out.println(ex.getMessage());
+        }
+
+        try(FileWriter writer = new FileWriter("outputEn.txt", false))
+        {
+            String text = encrypt(str);
+            writer.write(text);
+
+            writer.flush();
+        }
+        catch(IOException ex){
+
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public String decrypt(String str)
     {
         String newStr = "";
@@ -138,5 +172,33 @@ public class CaesarCipher
         return newStr;
     }
 
+    public void decryptFile(String file)
+    {
+        String str = "";
 
+        try(FileReader reader = new FileReader(file))
+        {
+            int c;
+            while((c=reader.read())!=-1){
+
+                str += (char)c;
+            }
+        }
+        catch(IOException ex){
+
+            System.out.println(ex.getMessage());
+        }
+
+        try(FileWriter writer = new FileWriter("outputDe.txt", false))
+        {
+            String text = decrypt(str);
+            writer.write(text);
+
+            writer.flush();
+        }
+        catch(IOException ex){
+
+            System.out.println(ex.getMessage());
+        }
+    }
 }
